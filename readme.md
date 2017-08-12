@@ -35,7 +35,15 @@ The bridge component provides the following blocks that interact to enable commu
 
 ### Back-end application ###
 
-The back-end application uses the IoT Hub service client and uses direct methods to trigger LwM2M operations on the bridge.
+The back-end application uses the IoT Hub service client and uses direct methods to trigger LwM2M operations on the bridge.   
+
+**REMARKS** Note that connection string of the *backend.js* must be configured to run on http transport. When using defaul connection strings, default transport will be AMQP, which cvurrentlly does not provide support for Direct Methods.
+
+Following is an example of correct connection string with http transport:
+
+`HostName=myiothub.azure-devices.net;SharedAccessKeyName=service;SharedAccessKey=/qnBG7P*****s49cI=;Transport:http';`
+
+If you do not specify *http* as transport, the client method *invokeDeviceMethod* on default AMQP transport will fail.
 
 ## Setup and config ##
 
